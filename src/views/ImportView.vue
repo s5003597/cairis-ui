@@ -103,7 +103,7 @@ export default {
       isOverwrite : true,
       errors : [],
       theModelType : 'Model Package',
-      modelTypes : ['Model Package','Model','Project data','Requirements','Risk Analysis','Usability','Misusability','Associations','Threat and Vulnerability Types','Domain Values','Threat and Vulnerability Directory','Security Pattern','Architectural Pattern','Attack Pattern','Synopses','Assets','Processes','Locations','Dataflows','Attack Tree (Dot)'],
+      modelTypes : ['Model Package','Model','Project data','Requirements','Risk Analysis', 'Risk Analysis (STIX)', 'Usability','Misusability','Associations','Threat and Vulnerability Types','Domain Values','Threat and Vulnerability Directory','Security Pattern','Architectural Pattern','Attack Pattern','Synopses','Assets','Processes','Locations','Dataflows','Attack Tree (Dot)'],
       theImportFile : '',
       theModelContent : '',
       theEnvironment : '',
