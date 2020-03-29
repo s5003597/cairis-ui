@@ -105,9 +105,10 @@ export default {
     },
     exportURL() {
       return this.theModelType == 'Model' || this.theModelType == 'ModelXML' ? '/api/export/file' :
-        (this.theModelType == 'Architectural Pattern' ? '/api/export/file/architectural_pattern/' + this.theArchitecturalPatternName : 
-          (this.theModelType == 'Security Patterns' ? '/api/export/file/security_patterns' : 
-            ('/api/export/file/grl/task/' + this.theTaskName + '/persona/' + this.persona + '/environment/' + this.theEnvironmentName)));
+        (this.theModelType == 'STIX' ? '/api/export/file/stix' :
+          (this.theModelType == 'Architectural Pattern' ? '/api/export/file/architectural_pattern/' + this.theArchitecturalPatternName : 
+            (this.theModelType == 'Security Patterns' ? '/api/export/file/security_patterns' : 
+              ('/api/export/file/grl/task/' + this.theTaskName + '/persona/' + this.persona + '/environment/' + this.theEnvironmentName))));
     },
     persona() {
       return this.thePersonaName == 'all' ? 'ALL' : this.thePersonaName;
@@ -169,8 +170,10 @@ export default {
       evt.preventDefault();
       if (this.checkForm()) {
         this.isLoading = true;
-        this.theExportParameters.fileType = this.theModelType == 'Model' ? 'cairis' : 'xml';
-        const fileType = this.theModelType == 'Model' ? 'octet-stream' : 'xml';
+        this.theExportParameters.fileType = this.theModelType == 'Model' ? 'cairis' : 
+          (this.theModelType == 'STIX' ? 'json' : 'xml');
+        const fileType = this.theModelType == 'Model' ? 'octet-stream' :
+          (this.theModelType == 'STIX' ? 'json' : 'xml');
         const exportHeaders = {'Content-Type': 'application/' + fileType} ;
 
         axios.get(this.exportURL,{
