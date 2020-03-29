@@ -38,6 +38,7 @@ Authors: Shamal Faily
                 <b-form-radio-group id="theModelRadio" v-model="theModelType">
                   <b-form-radio value="Model">Model</b-form-radio>
                   <b-form-radio value="ModelXML">Model (XML file)</b-form-radio>
+                  <b-form-radio value="STIX">Risk Analysis (STIX)</b-form-radio>
                   <b-form-radio value="GRL">GRL</b-form-radio>
                   <b-form-radio value="Architectural Pattern">Architectural Pattern</b-form-radio>
                   <b-form-radio value="Security Patterns">Security Patterns</b-form-radio>
