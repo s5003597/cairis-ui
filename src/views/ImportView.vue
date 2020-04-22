@@ -40,6 +40,11 @@ Authors: Shamal Faily
               <b-form-checkbox v-model="isOverwrite" >Overwrite existing</b-form-checkbox>
             </b-form-group>
           </div>
+          <div v-show="theModelType == 'Risk Analysis (STIX)'">
+            <b-form-group>
+              <b-form-checkbox v-model="isFastEdit" >Enable Fast Edit</b-form-checkbox>
+            </b-form-group>
+          </div>
           <b-form-group label="File" label-class="text-md-left" label-cols="3" label-for="theImportFileInput">
             <b-form-file accept="text/xml+vnd.graphviz" v-model="theImportFile" class="mt-3" plain />
           </b-form-group>
@@ -101,6 +106,7 @@ export default {
     return {
       isLoading : false,
       isOverwrite : true,
+      isFastEdit: true,
       errors : [],
       theModelType : 'Model Package',
       modelTypes : ['Model Package','Model','Project data','Requirements','Risk Analysis', 'Risk Analysis (STIX)', 'Usability','Misusability','Associations','Threat and Vulnerability Types','Domain Values','Threat and Vulnerability Directory','Security Pattern','Architectural Pattern','Attack Pattern','Synopses','Assets','Processes','Locations','Dataflows','Attack Tree (Dot)'],
@@ -172,7 +178,11 @@ export default {
         .then(response => {
           EventBus.$emit('operation-success',response.data.message);
           this.isLoading = false;
-          this.$router.push({ name: 'home'})
+          if (this.isFastEdit && this.theModelType == 'Risk Analysis (STIX)') {
+            this.$router.push({ name: 'fastedit'})
+          } else{
+            this.$router.push({ name: 'home'})
+          }
         })
         .catch((error) => {
           this.isLoading = false;

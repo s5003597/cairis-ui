@@ -23,6 +23,31 @@ import EventBus from '../utils/event-bus';
 export default {
 
   methods : {
+    fastEditCommit(updateUrl,createUrl) {
+      if (this.commitLabel == 'Update') {
+        axios.put(updateUrl,{
+          session_id : this.$store.state.session,
+          object : this.objt
+        })
+        .then(response => {
+          EventBus.$emit('operation-success',response.data.message)
+        })
+        .catch((error) => {
+          EventBus.$emit('operation-failure',error.response.data.message);
+        });
+      } else {
+        axios.post(createUrl,{
+          session_id : this.$store.state.session,
+          object : this.objt
+        })
+        .then(response => {
+          EventBus.$emit('operation-success',response.data.message)
+        })
+        .catch((error) => {
+          EventBus.$emit('operation-failure',error.response.data.message);
+        });
+      }
+    },
     commitObject(updateUrl,createUrl,dimRoute,defaultParameters,dimParameter) {
       if (typeof defaultParameters == 'undefined') {
         defaultParameters = {post : {}, put: {}}
